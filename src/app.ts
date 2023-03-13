@@ -5,7 +5,7 @@ import { usersRouter } from './routers/users.router.js';
 import createDebug from 'debug';
 import { errorsMiddleware } from './middlewares/middlewares.js';
 
-const debug = createDebug('GW:app');
+const debug = createDebug('RM:app');
 
 debug('App initiated');
 
