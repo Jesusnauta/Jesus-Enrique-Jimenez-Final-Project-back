@@ -1,4 +1,4 @@
-name: Build
+name: Sonar
 on:
   push:
     branches:
@@ -10,9 +10,19 @@ jobs:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Install modules
+        run: npm ci
+      - name: Testing in production with coverage
+        run: npm run test:prod #Change for a valid npm script
+        env:
+        ${{ DB_USER=<Write your DB User }}
+        ${{ DB_PASSWORD=<Write your  DB Password }}
+        ${{ DB_CLUSTER=<Write your DB Cluster }}
+        ${{ DB_NAME=<Write your DB Name }}
+        ${{ SECRET=<Write your secret word }}
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
