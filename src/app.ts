@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { usersRouter } from './routers/users.router.js';
 import createDebug from 'debug';
-import { errorsMiddleware } from './middlewares/middlewares.js';
+import { middleware } from './middlewares/middlewares.js';
 
 const debug = createDebug('RM:app');
 
@@ -22,7 +22,7 @@ app.use(cors(corsOptions));
 
 app.use('/users', usersRouter);
 
-app.use(errorsMiddleware);
+app.use(middleware);
 
 app.use('*', (_req, resp, next) => {
   resp
