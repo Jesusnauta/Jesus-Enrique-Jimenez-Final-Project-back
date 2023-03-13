@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "cross-env DEBUG=GW* PORT=4100 node ./dist/index.js -w",
-    "start:mon": "cross-env DEBUG=GW* PORT=4100 nodemon ./dist/index.js",
+    "start": "cross-env DEBUG=RM* PORT=6500 node ./dist/index.js -w",
+    "start:mon": "cross-env DEBUG=RM* PORT=6500 nodemon ./dist/index.js",
     "build": "tsc -w",
     "prebuild": "npm run copy:public",
     "copy:public": "copyfiles -u 1 src/public/**/*.* dist",
