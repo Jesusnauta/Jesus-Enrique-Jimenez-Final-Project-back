@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from 'express';
 import { HTTPError } from '../errors/errors.js';
 import { Auth, TokenPayload } from '../helpers/auth.js';
 
-const debug = createDebug('GW:users-controller');
+const debug = createDebug('RM:users-controller');
 
 export class UsersController {
   constructor(public usersRepo: Repo<UserStructure>) {
