@@ -3,9 +3,9 @@ import { CustomError, HTTPError } from '../errors/errors.js';
 import createDebug from 'debug';
 import { Error as MongooseError } from 'mongoose';
 
-const debug = createDebug('GW:errorsMiddleware');
+const debug = createDebug('RM:middleware');
 
-export const errorsMiddleware = (
+export const middleware = (
   error: CustomError | Error,
   _req: Request,
   resp: Response,
