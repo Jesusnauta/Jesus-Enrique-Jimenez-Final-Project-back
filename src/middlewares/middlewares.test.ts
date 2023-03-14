@@ -13,7 +13,7 @@ describe('Given middleware', () => {
 
   const next = jest.fn() as NextFunction;
 
-  describe('When the error is a CustomError, HTTPError with satusCode', () => {
+  describe('When the error is a CustomError, HTTPError with statusCode', () => {
     test('Then if the status code is the testNumber, it should return this value ', () => {
       const testNumber = 418;
       const error = new HTTPError(testNumber, 'test', 'test');
