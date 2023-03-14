@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { UserStructure } from '../entities/users';
+import { Users } from '../entities/users';
 
-const userSchema = new Schema<UserStructure>({
+const userSchema = new Schema<Users>({
   email: {
     type: String,
     required: true,
