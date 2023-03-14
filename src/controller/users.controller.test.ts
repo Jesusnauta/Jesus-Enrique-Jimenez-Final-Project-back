@@ -64,7 +64,7 @@ describe('Given the controller UsersController', () => {
   });
 
   describe('When Login method is called', () => {
-    test('Then if the user information is completed, it should return the resp.status and resp.json', async () => {
+    test('Then if the users information is completed, it should return the resp.status and resp.json', async () => {
       const req = {
         body: {
           userName: 'test',
