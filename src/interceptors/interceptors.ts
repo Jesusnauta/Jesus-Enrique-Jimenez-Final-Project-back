@@ -3,7 +3,7 @@ import { HTTPError } from '../errors/errors.js';
 import { Auth, TokenPayload } from '../helpers/auth.js';
 import createDebug from 'debug';
 
-const debug = createDebug('GW:interceptors');
+const debug = createDebug('RM:interceptors');
 
 export interface RequestPlus extends Request {
   info?: TokenPayload;

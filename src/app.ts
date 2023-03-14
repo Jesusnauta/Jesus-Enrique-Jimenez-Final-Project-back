@@ -3,9 +3,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { usersRouter } from './routers/users.router.js';
 import createDebug from 'debug';
-import { errorsMiddleware } from './middlewares/middlewares.js';
+import { middleware } from './middlewares/middlewares.js';
 
-const debug = createDebug('GW:app');
+const debug = createDebug('RM:app');
 
 debug('App initiated');
 
@@ -21,8 +21,9 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use('/users', usersRouter);
+//  TEMP app.use('/players', playersRouter);
 
-app.use(errorsMiddleware);
+app.use(middleware);
 
 app.use('*', (_req, resp, next) => {
   resp
