@@ -1,4 +1,4 @@
-import { UserStructure } from '../entities/users';
+import { Users } from '../entities/users';
 import { Repo } from '../repository/repo.interface';
 import createDebug from 'debug';
 import { NextFunction, Request, Response } from 'express';
@@ -8,7 +8,7 @@ import { Auth, TokenPayload } from '../helpers/auth.js';
 const debug = createDebug('RM:users-controller');
 
 export class UsersController {
-  constructor(public usersRepo: Repo<UserStructure>) {
+  constructor(public usersRepo: Repo<Users>) {
     this.usersRepo = usersRepo;
 
     debug('users-controller-instanced');
@@ -23,7 +23,7 @@ export class UsersController {
 
       req.body.password = await Auth.hash(req.body.password);
 
-      req.body.myGuitars = [];
+      req.body.players = [];
       req.body.role = 'User';
 
       const data = await this.usersRepo.create(req.body);

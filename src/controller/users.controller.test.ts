@@ -1,6 +1,6 @@
 import { UsersController } from './users.controller';
 import { NextFunction, Request, Response } from 'express';
-import { UserStructure } from '../entities/users';
+import { Users } from '../entities/users';
 import { Repo } from '../repository/repo.interface';
 import { Auth } from '../helpers/auth.js';
 
@@ -14,7 +14,7 @@ describe('Given the controller UsersController', () => {
     update: jest.fn(),
     erase: jest.fn(),
     search: jest.fn(),
-  } as unknown as Repo<UserStructure>;
+  } as unknown as Repo<Users>;
 
   const controller = new UsersController(mockRepo);
 
