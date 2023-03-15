@@ -16,7 +16,7 @@ export class UsersController {
 
   async register(req: Request, resp: Response, next: NextFunction) {
     try {
-      debug('post-register-method');
+      debug('post-register');
 
       if (!req.body.userName || !req.body.password)
         throw new HTTPError(401, 'Unauthorized', 'Invalid username o password');
@@ -39,7 +39,7 @@ export class UsersController {
 
   async login(req: Request, resp: Response, next: NextFunction) {
     try {
-      debug('post-login-method');
+      debug('post-login');
 
       if (!req.body.userName || !req.body.password)
         throw new HTTPError(
@@ -57,7 +57,7 @@ export class UsersController {
         throw new HTTPError(401, 'Unauthorized', 'Username not found');
 
       if (!(await Auth.compare(req.body.password, data[0].password)))
-        throw new HTTPError(401, 'Unauthorized', 'Password does not match');
+        throw new HTTPError(430, 'Unauthorized', 'Password does not match');
 
       const payload: TokenPayload = {
         id: data[0].id,

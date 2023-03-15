@@ -8,11 +8,11 @@ jest.mock('../helpers/auth.js');
 
 describe('Given the controller UsersController', () => {
   const mockRepo = {
-    read: jest.fn(),
-    readId: jest.fn(),
+    query: jest.fn(),
+    queryId: jest.fn(),
     create: jest.fn(),
     update: jest.fn(),
-    erase: jest.fn(),
+    delete: jest.fn(),
     search: jest.fn(),
   } as unknown as Repo<Users>;
 
