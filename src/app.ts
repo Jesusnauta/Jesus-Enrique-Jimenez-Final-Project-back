@@ -4,10 +4,9 @@ import cors from 'cors';
 import { usersRouter } from './routers/users.router.js';
 import createDebug from 'debug';
 import { middleware } from './middlewares/middlewares.js';
+import { playersRouter } from './routers/players.router.js';
 
 const debug = createDebug('RM:app');
-
-debug('App initiated');
 
 export const app = express();
 
@@ -20,14 +19,14 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors(corsOptions));
 
+// Tapp.use(express.static(path.resolve('public')));
+
 app.use('/users', usersRouter);
-//  TEMP app.use('/players', playersRouter);
+app.use('/players', playersRouter);
 
 app.use(middleware);
 
 app.use('*', (_req, resp, next) => {
-  resp
-    .status(404)
-    .send(`<h1>Sorry, the path is not valid. Try again, please<h1>`);
+  resp.status(404).send(`<h1>Sorry, the path is not valid<h1>`);
   next();
 });
