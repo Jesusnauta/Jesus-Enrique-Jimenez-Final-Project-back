@@ -4,13 +4,13 @@ import createDebug from 'debug';
 import { UsersMongoRepo } from '../repository/users.mongo.repo.js';
 
 const debug = createDebug('RM:router');
+debug('users-router');
 
 export const usersRouter = router();
-const repoUsers = UsersMongoRepo.getInstance();
+const repoUsers = new UsersMongoRepo();
 const controller = new UsersController(repoUsers);
 
-debug('Users Router');
-// TEMP usersRouter.get('/', logged, controller.getAll.bind(controller));
+// TEMP usersRouter.get('/', logged , controller.getAll.bind(controller));
 usersRouter.post('/register', controller.register.bind(controller));
 usersRouter.post('/login', controller.login.bind(controller));
 // TEMP usersRouter.patch('/addfav/:id', controller.addFav.bind(controller));

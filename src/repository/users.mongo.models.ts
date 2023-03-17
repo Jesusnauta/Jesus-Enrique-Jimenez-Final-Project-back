@@ -22,7 +22,7 @@ const userSchema = new Schema<Users>({
   players: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Players',
+      ref: 'Player',
     },
   ],
 });
