@@ -23,6 +23,15 @@ app.use(cors(corsOptions));
 
 app.use('/users', usersRouter);
 app.use('/players', playersRouter);
+app.get('/', (_req, resp) => {
+  resp.json({
+    info: 'RM',
+    endpoints: {
+      users: '/users',
+      players: '/players',
+    },
+  });
+});
 
 app.use(middleware);
 
