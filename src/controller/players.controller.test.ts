@@ -26,6 +26,7 @@ describe('Given PlayersController', () => {
 
   const controller = new PlayersController(repo, userRepo);
 
+  // Testing
   describe('When getAll is called', () => {
     test('Then it should ... if there ara NOT errors', async () => {
       await controller.getAll(req, resp, next);
