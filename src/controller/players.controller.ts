@@ -1,10 +1,10 @@
 import { Response, Request, NextFunction } from 'express';
-
 import { Repo } from '../repository/repo.interface.js';
 import { Players } from '../entities/players.js';
 import createDebug from 'debug';
 import { RequestPlus } from '../interceptors/interceptors.js';
 import { Users } from '../entities/users.js';
+import { HTTPError } from '../errors/errors.js';
 const debug = createDebug('RM:controller:players');
 
 export class PlayersController {
@@ -39,13 +39,13 @@ export class PlayersController {
   async post(req: RequestPlus, resp: Response, next: NextFunction) {
     try {
       debug('post');
-      // TEMP Const userId = req.info?.id;
-      // if (!userId) throw new HTTPError(404, 'Not found', 'Not found user id');
-      // const actualUser = await this.repoUsers.queryId(userId);
-      // req.body.creator = userId;
+      const userId = req.info?.id;
+      if (!userId) throw new HTTPError(404, 'Not found', 'Not found user id');
+      const actualUser = await this.repoUsers.queryId(userId);
+      req.body.creator = userId;
       const newPlayer = await this.repo.create(req.body);
-      // ActualUser.players.push(newPlayer);
-      // this.repoUsers.update(actualUser);
+      actualUser.players.push(newPlayer);
+      this.repoUsers.update(actualUser);
       resp.json({
         results: [newPlayer],
       });

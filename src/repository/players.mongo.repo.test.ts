@@ -125,7 +125,6 @@ describe('Given the repository PlayersMongoRepo', () => {
       (PlayersModel.findByIdAndDelete as jest.Mock).mockImplementation(
         mockExec
       );
-      // Expect(async () => repo.delete('')).rejects.toThrow();
     });
   });
 

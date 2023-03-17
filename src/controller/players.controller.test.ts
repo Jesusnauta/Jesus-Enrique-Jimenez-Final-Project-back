@@ -1,4 +1,4 @@
-import { Response, Request, NextFunction } from 'express';
+import { Response, Request } from 'express';
 import { PlayersController } from './players.controller';
 import { UsersMongoRepo } from '../repository/users.mongo.repo';
 import { PlayersMongoRepo } from '../repository/players.mongo.repo';
