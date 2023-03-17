@@ -33,33 +33,4 @@ export abstract class Interceptors {
       next(error);
     }
   }
-
-  // T static authorized(req: RequestPlus, _resp: Response, next: NextFunction) {
-  //   try {
-  //     debug('Authorized');
-
-  //     if (!req.info)
-  //       throw new HTTPError(
-  //         498,
-  //         'Token not found',
-  //         'Token not found in authorized interceptor'
-  //       );
-
-  //     if (!req.params.id)
-  //       throw new HTTPError(404, 'Not found', 'Not found user ID in params');
-
-  //     if (req.info?.id !== req.params.id)
-  //       throw new HTTPError(
-  //         401,
-  //         'Unauthorized',
-  //         'The ID from params is not equal to ID from Token'
-  //       );
-
-  //     req.body.id = req.info?.id;
-
-  //     next();
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
 }
