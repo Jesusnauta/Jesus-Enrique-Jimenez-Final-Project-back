@@ -1,6 +1,8 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 export default {
+  verbose: true,
   preset: 'ts-jest',
+  onlyChanged: false,
   testEnvironment: 'node',
   testPathIgnorePatterns: ['dist'],
   resolver: 'jest-ts-webcompat-resolver',

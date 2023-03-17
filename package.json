@@ -1,16 +1,18 @@
 {
-  "name": "Proyecto final",
+  "name": "proyecto-final",
   "version": "1.0.0",
   "description": "Real Madrid Fantasy",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "cross-env DEBUG=RM* PORT=6500 node ./dist/index.js -w",
+    "start": "cross-env DEBUG=RM* PORT=6500 node ./dist/index.js",
     "start:mon": "cross-env DEBUG=RM* PORT=6500 nodemon ./dist/index.js",
     "build": "tsc -w",
+    "build:prod": "tsc",
     "prebuild": "npm run copy:public",
     "copy:public": "copyfiles -u 1 src/public/**/*.* dist",
-    "test": "cross-env NODE_ENV=test jest --watchAll --coverage",
+    "test:test": "jest",
+    "test": "jest --watchAll --coverage",
     "test:prod": "cross-env NODE_ENV=test jest --watchAll --coverage --watchAll=false --passWithNoTests",
     "prepare": "husky install"
   },
