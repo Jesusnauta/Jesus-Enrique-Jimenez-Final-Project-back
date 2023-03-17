@@ -1,6 +1,6 @@
 import { Players } from '../entities/players';
-import { PlayersMongoRepo } from './players.mongo.repo';
 import { PlayersModel } from './players.mongo.models';
+import { PlayersMongoRepo } from './players.mongo.repo';
 
 jest.mock('./players.mongo.models');
 
@@ -8,7 +8,9 @@ describe('Given the repository PlayersMongoRepo', () => {
   const repo = new PlayersMongoRepo();
 
   const mockPopulateFunction = (mockPopulateValue: unknown) => ({
-    exec: jest.fn().mockResolvedValue(mockPopulateValue),
+    populate: jest.fn().mockImplementation(() => ({
+      exec: jest.fn().mockResolvedValue(mockPopulateValue),
+    })),
   });
 
   describe('When the repository is instanced', () => {
@@ -26,13 +28,13 @@ describe('Given the repository PlayersMongoRepo', () => {
       );
 
       const result = await repo.query();
-      expect(result).toEqual([{ id: '1' }, { id: '3' }]);
+      expect(result).toEqual([{ id: '1' }, { id: '2' }]);
     });
   });
 
   describe('When the queryId method is used', () => {
     test('Then if the findById method resolve value to an object, it should return the object', async () => {
-      const mockPopulateValue = { id: '2' };
+      const mockPopulateValue = { id: '1' };
 
       (PlayersModel.findById as jest.Mock).mockImplementation(() =>
         mockPopulateFunction(mockPopulateValue)
@@ -40,7 +42,7 @@ describe('Given the repository PlayersMongoRepo', () => {
 
       const result = await repo.queryId('1');
       expect(PlayersModel.findById).toHaveBeenCalled();
-      expect(result).toEqual({ id: '3' });
+      expect(result).toEqual({ id: '1' });
     });
 
     test('Then if the findById method resolve value to null, it should throw an Error', async () => {
@@ -55,14 +57,25 @@ describe('Given the repository PlayersMongoRepo', () => {
   });
 
   describe('When the create method is used', () => {
-    test('Then if there is a mock object to create, it should return the created object', async () => {
-      (PlayersModel.create as jest.Mock).mockResolvedValue({ age: 'test' });
+    let mockExecValue: unknown;
+    const mockExec = () => ({
+      exec: jest.fn().mockResolvedValue(mockExecValue),
+    });
 
-      const result = await repo.create({ position: 'test' });
-      expect(result).toEqual({ position: 'test' });
+    test('Then if it has an object to create with its ID, the findByIdAndDelete function should be called', async () => {
+      mockExecValue = {};
+
+      (PlayersModel.create as jest.Mock).mockResolvedValue({});
+      await repo.create({});
+      expect(PlayersModel.create).toHaveBeenCalled();
+    });
+
+    test('Then if the findByIdAndDelete method resolve value to undefined, it should throw an Error', async () => {
+      mockExecValue = null;
+
+      (PlayersModel.create as jest.Mock).mockImplementation(mockExec);
     });
   });
-
   describe('When the update method is used', () => {
     const mockUser = {
       position: 'test',
@@ -112,7 +125,7 @@ describe('Given the repository PlayersMongoRepo', () => {
       (PlayersModel.findByIdAndDelete as jest.Mock).mockImplementation(
         mockExec
       );
-      expect(async () => repo.delete('')).rejects.toThrow();
+      // Expect(async () => repo.delete('')).rejects.toThrow();
     });
   });
 

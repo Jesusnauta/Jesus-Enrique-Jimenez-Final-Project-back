@@ -37,9 +37,7 @@ export class PlayersMongoRepo implements Repo<Players> {
 
   async create(info: Partial<Players>): Promise<Players> {
     debug('create');
-    const data = (await PlayersModel.create(info)).populate('creator', {
-      players: 0,
-    });
+    const data = await PlayersModel.create(info);
     return data;
   }
 
