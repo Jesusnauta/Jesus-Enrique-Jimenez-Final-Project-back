@@ -19,8 +19,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors(corsOptions));
 
-// Tapp.use(express.static(path.resolve('public')));
-
 app.use('/users', usersRouter);
 app.use('/players', playersRouter);
 app.get('/', (_req, resp) => {
