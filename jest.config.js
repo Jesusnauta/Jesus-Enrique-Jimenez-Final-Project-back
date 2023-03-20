@@ -11,7 +11,8 @@ export default {
     'index.ts',
     'app.ts',
     'routers',
-    'players.mongo.models',
-    'users.mongo.models',
+    'players.mongo.models.ts',
+    'users.mongo.models.ts',
+    'src/config.ts',
   ],
 };
