@@ -103,28 +103,20 @@ describe('Given the repository PlayersMongoRepo', () => {
     });
   });
 
-  describe('When the delete method is used', () => {
-    let mockExecValue: unknown;
-    const mockExec = () => ({
-      exec: jest.fn().mockResolvedValue(mockExecValue),
-    });
-
-    test('Then if it has an object to delete with its ID, the findByIdAndDelete function should be called', async () => {
-      mockExecValue = {};
-
-      (PlayersModel.findByIdAndDelete as jest.Mock).mockImplementation(
-        mockExec
-      );
+  describe('Given the delete method ', () => {
+    test('Then it should delete the user for sure ', async () => {
+      (PlayersModel.findByIdAndDelete as jest.Mock).mockResolvedValue([{}]);
       await repo.delete('1');
       expect(PlayersModel.findByIdAndDelete).toHaveBeenCalled();
     });
-
-    test('Then if the findByIdAndDelete method resolve value to undefined, it should throw an Error', async () => {
-      mockExecValue = null;
-
-      (PlayersModel.findByIdAndDelete as jest.Mock).mockImplementation(
-        mockExec
+    test('Then it should delete the user ', () => {
+      (PlayersModel.findByIdAndDelete as jest.Mock).mockResolvedValue(
+        undefined
       );
+      const mockUsers = '1';
+
+      expect(() => repo.delete(mockUsers)).rejects.toThrow();
+      expect(PlayersModel.findByIdAndDelete).toHaveBeenCalled();
     });
   });
 
