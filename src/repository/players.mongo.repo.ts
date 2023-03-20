@@ -54,7 +54,7 @@ export class PlayersMongoRepo implements Repo<Players> {
 
   async delete(id: string): Promise<void> {
     debug('delete');
-    const data = PlayersModel.findByIdAndDelete(id);
+    const data = await PlayersModel.findByIdAndDelete(id);
     if (!data)
       throw new HTTPError(404, 'Not found', 'Delete not posible: id not found');
   }
