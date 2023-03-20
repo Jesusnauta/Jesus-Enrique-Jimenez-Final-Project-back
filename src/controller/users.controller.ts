@@ -8,6 +8,8 @@ import { Auth, TokenPayload } from '../helpers/auth.js';
 const debug = createDebug('RM:users-controller');
 
 export class UsersController {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getAll: any;
   constructor(public usersRepo: Repo<Users>) {
     this.usersRepo = usersRepo;
 
