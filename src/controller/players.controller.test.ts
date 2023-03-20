@@ -15,10 +15,6 @@ describe('Given PlayersController', () => {
 
   const userRepo = {} as UsersMongoRepo;
 
-  const req = {
-    body: {},
-    params: { id: '' },
-  } as unknown as Request;
   const resp = {
     json: jest.fn(),
   } as unknown as Response;
@@ -100,14 +96,14 @@ describe('Given PlayersController', () => {
       params: { id: '' },
     } as unknown as Request;
     test('Then it should ... if there ara NOT errors', async () => {
-      await controller.delete(req, resp, next);
+      controller.delete(req, resp, next);
       expect(repo.delete).toHaveBeenCalled();
       expect(resp.json).toHaveBeenCalled();
     });
 
     test('Then it should ... if there are errors', async () => {
       (repo.delete as jest.Mock).mockRejectedValue(new Error());
-      await controller.delete(req, resp, next);
+      controller.delete(req, resp, next);
       expect(next).toHaveBeenCalled();
     });
   });
