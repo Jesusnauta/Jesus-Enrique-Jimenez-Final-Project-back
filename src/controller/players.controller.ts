@@ -4,7 +4,6 @@ import { Players } from '../entities/players.js';
 import createDebug from 'debug';
 import { RequestPlus } from '../interceptors/interceptors.js';
 import { Users } from '../entities/users.js';
-import { HTTPError } from '../errors/errors.js';
 const debug = createDebug('RM:controller:players');
 
 export class PlayersController {
