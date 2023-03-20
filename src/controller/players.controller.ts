@@ -39,13 +39,7 @@ export class PlayersController {
   async post(req: RequestPlus, resp: Response, next: NextFunction) {
     try {
       debug('post');
-      const userId = req.info?.id;
-      if (!userId) throw new HTTPError(404, 'Not found', 'Not found user id');
-      const actualUser = await this.repoUsers.queryId(userId);
-      req.body.creator = userId;
-      const newPlayer = await this.repo.create(req.body);
-      actualUser.players.push(newPlayer);
-      this.repoUsers.update(actualUser);
+      const newPlayer = await this.post(req, resp, next);
       resp.json({
         results: [newPlayer],
       });
@@ -57,7 +51,6 @@ export class PlayersController {
   async patch(req: Request, resp: Response, next: NextFunction) {
     try {
       debug('patch');
-      req.body.id = req.params.id ? req.params.id : req.body.id;
       const data = await this.repo.update(req.body);
       resp.json({
         results: [data],
