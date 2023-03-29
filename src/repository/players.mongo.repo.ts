@@ -35,9 +35,9 @@ export class PlayersMongoRepo implements Repo<Players> {
     return data;
   }
 
-  async create(info: Partial<Players>): Promise<Players> {
+  async create(player: Partial<Players>): Promise<Players> {
     debug('create');
-    const data = await PlayersModel.create(info);
+    const data = await PlayersModel.create(player);
     return data;
   }
 
@@ -45,9 +45,8 @@ export class PlayersMongoRepo implements Repo<Players> {
     debug('update');
     const data = await PlayersModel.findByIdAndUpdate(info.id, info, {
       new: true,
-    })
-      .populate('creator', { players: 0 })
-      .exec();
+    });
+
     if (!data) throw new HTTPError(404, 'Not found', 'Id not found in update');
     return data;
   }

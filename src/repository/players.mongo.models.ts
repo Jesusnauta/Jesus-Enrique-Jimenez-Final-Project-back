@@ -5,7 +5,9 @@ const playerSchema = new Schema<Players>({
   name: {
     type: String,
     required: true,
-    unique: true,
+  },
+  picture: {
+    type: String,
   },
   position: {
     type: String,
@@ -24,10 +26,13 @@ const playerSchema = new Schema<Players>({
     required: true,
   },
   creator: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
   },
 });
+
+// TEMPORAL:
+// type: Schema.Types.ObjectId,
+// ref: 'User',
 
 playerSchema.set('toJSON', {
   transform(_document, returnedObject) {
