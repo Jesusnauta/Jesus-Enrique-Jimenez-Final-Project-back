@@ -16,6 +16,7 @@ describe('Given PlayersController', () => {
   const userRepo = {} as UsersMongoRepo;
 
   const resp = {
+    status: jest.fn(),
     json: jest.fn(),
   } as unknown as Response;
   const next = jest.fn();
@@ -24,7 +25,7 @@ describe('Given PlayersController', () => {
 
   describe('When getAll is called', () => {
     const req = {
-      body: {},
+      body: { name: 'test' },
       params: { id: '' },
     } as unknown as Request;
     test('Then it should ... if there ara NOT errors', async () => {
@@ -57,19 +58,20 @@ describe('Given PlayersController', () => {
   });
   describe('When post is called', () => {
     const req = {
-      body: {},
+      body: { name: 'test' },
       params: { id: '' },
     } as unknown as Request;
     test('Then it should ... if there ara NOT errors', async () => {
-      await controller.post(req, resp, next);
-      expect(repo.query).toHaveBeenCalled();
-      expect(resp.json).toHaveBeenCalled();
+      (repo.create as jest.Mock).mockResolvedValue({ name: 'test' });
+
+      await controller.create(req, resp, next);
+      expect(resp.json).toHaveBeenCalledWith({ results: [{ name: 'test' }] });
     });
 
     test('Then it should ... if there are errors', async () => {
-      (repo.query as jest.Mock).mockRejectedValue(new Error());
-      await controller.post(req, resp, next);
-      expect(repo.query).toHaveBeenCalled();
+      (repo.create as jest.Mock).mockRejectedValue(new Error());
+      await controller.create(req, resp, next);
+      expect(repo.create).toHaveBeenCalled();
       expect(next).toHaveBeenCalled();
     });
   });

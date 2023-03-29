@@ -2,8 +2,8 @@ import { Response, Request, NextFunction } from 'express';
 import { Repo } from '../repository/repo.interface.js';
 import { Players } from '../entities/players.js';
 import createDebug from 'debug';
-import { RequestPlus } from '../interceptors/interceptors.js';
 import { Users } from '../entities/users.js';
+import { RequestPlus } from '../interceptors/interceptors.js';
 const debug = createDebug('RM:controller:players');
 
 export class PlayersController {
@@ -35,12 +35,14 @@ export class PlayersController {
     }
   }
 
-  async post(req: RequestPlus, resp: Response, next: NextFunction) {
+  async create(req: RequestPlus, resp: Response, next: NextFunction) {
     try {
-      debug('post');
-      const newPlayer = await this.post(req, resp, next);
+      debug('create-method');
+
+      const playerData = await this.repo.create(req.body);
+      resp.status(201);
       resp.json({
-        results: [newPlayer],
+        results: [playerData],
       });
     } catch (error) {
       next(error);
