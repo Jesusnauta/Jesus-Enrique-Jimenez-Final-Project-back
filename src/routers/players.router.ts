@@ -31,5 +31,3 @@ playersRouter.delete(
   Interceptors.logged,
   controller.delete.bind(controller)
 );
-// TEMP usersRouter.patch('/addfav/:id', Interceptors.logged, controller.addFav.bind(controller));
-// usersRouter.patch('/deletefav/:id', Interceptors.logged, controller.deleteFav.bind(controller));
