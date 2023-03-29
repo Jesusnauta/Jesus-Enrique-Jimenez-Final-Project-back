@@ -4,7 +4,6 @@ import createDebug from 'debug';
 import { PlayersMongoRepo } from '../repository/players.mongo.repo.js';
 import { Interceptors } from '../interceptors/interceptors.js';
 import { UsersMongoRepo } from '../repository/users.mongo.repo.js';
-import { authorized } from '../interceptors/authorized.js';
 
 const debug = createDebug('RM:router:players');
 debug('players-router');
